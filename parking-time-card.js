@@ -14,16 +14,35 @@ class ParkingTimeCard extends HTMLElement {
     }
 
     updateTime(startTime) {
-        const now = new Date();
-        const elapsed = now - startTime;
-        const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+		const now = new Date();
+		const elapsed = now - startTime;
+		const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+		const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+		const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
-        this.innerHTML = `
-			<ha-alert title="Has been parked for" alert-type="info">${days > 0 ? `${days}d ` : ''}${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}</ha-alert>`;
-    }
+		const options = {
+			year: 'numeric',
+			month: '2-digit',
+			day: '2-digit',
+			hour: '2-digit',
+			minute: '2-digit',
+			second: '2-digit',
+			hour12: false,
+			timeZone: this.config.time_zone
+		};
+		const localTimeString = new Date(startTime.toLocaleString("en-US", options)).toLocaleString("en-US", options).replace(',', '');
+
+		this.innerHTML = `
+			<ha-alert title="Has been parked for" alert-type="info">
+				<div class="primary">
+					${days > 0 ? `${days}d ` : ''}${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}
+				</div>
+				<div class="secondary">
+					Local time: ${localTimeString}
+				</div>
+			</ha-alert>`;
+	}
 
     pad(value) {
         return String(value).padStart(2, '0');
