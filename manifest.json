@@ -1,0 +1,17 @@
+{
+  "name": "Parking Time Card",
+  "content_in_root": false,
+  "filename": "parking-time-card.js",
+  "domains": [],
+  "country": "US",
+  "homeassistant": "2023.8.0",
+  "render_readme": true,
+  "zip_release": false,
+  "iot_class": "local_polling",
+  "version": "1.0.0",
+  "resources": [
+    {
+      "url": "/local/parking-time-card.js",
+      "type": "module"
+    }
+  ]
