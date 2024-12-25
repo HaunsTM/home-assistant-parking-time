@@ -36,7 +36,7 @@ class ParkingTimeCard extends HTMLElement {
 		this.innerHTML = `
 			<ha-alert title="Has been parked for" alert-type="info">
 				<div class="primary">
-					${days > 0 ? `${days}d ` : ''}${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}
+					${days > 0 ? `${days}d ` : ''}${this.pad(hours)} h ${this.pad(minutes)} m ${this.pad(seconds)} s
 				</div>
 				<div class="secondary">
 					Local time: ${localTimeString}
