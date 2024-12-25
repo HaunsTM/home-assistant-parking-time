@@ -1,6 +1,5 @@
 class ParkingTimeCard extends HTMLElement {
     set hass(hass) {
-        this.hass = hass;
         const entityId = this.config.entity;
         const state = hass.states[entityId];
         const timestamp = new Date(state.state);
