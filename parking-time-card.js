@@ -22,23 +22,7 @@ class ParkingTimeCard extends HTMLElement {
         const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
         this.innerHTML = `
-            <ha-card>
-                <style>
-                    @font-face {
-                        font-family: 'Digital-7';
-                        src: url('/local/fonts/digital-7.ttf') format('truetype');
-                    }
-                    .time-display {
-                        font-family: 'Digital-7', sans-serif;
-                        font-size: 2em;
-                    }
-                </style>
-                <div class="card-content">
-                    <div class="label">Elapsed time since parking:</div>
-                    <div class="time-display">${days > 0 ? `${days}d ` : ''}${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}</div>
-                </div>
-            </ha-card>
-        `;
+			<ha-alert title="Has been parked for" alert-type="info">${days > 0 ? `${days}d ` : ''}${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}</ha-alert>`;
     }
 
     pad(value) {
