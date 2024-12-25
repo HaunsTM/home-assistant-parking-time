@@ -31,7 +31,7 @@ class ParkingTimeCard extends HTMLElement {
 			hour12: false,
 			timeZone: this.config.time_zone
 		};
-		const localTimeString = new Date(startTime.toLocaleString("en-US", options)).toLocaleString("en-US", options).replace(',', '');
+		const localTimeString = startTime.toLocaleString(undefined, options).replace(',', '');
 
 		this.innerHTML = `
 			<ha-alert title="Has been parked for" alert-type="info">
