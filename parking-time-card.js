@@ -64,7 +64,6 @@ class ParkingTimeCard extends HTMLElement {
     }
 
     parkingTimeString(startTime, locale, timeZone) {
-        // Convert the timestamp to the local time in the specified time zone
         const options = {
             timeZone: timeZone,
             year: 'numeric',
@@ -75,7 +74,7 @@ class ParkingTimeCard extends HTMLElement {
             second: '2-digit',
             hour12: false
         };
-        
+
         return startTime.toLocaleString(locale, options);
     }
 
