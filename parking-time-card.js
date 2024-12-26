@@ -1,4 +1,5 @@
 class ParkingTimeCard extends HTMLElement {
+
     set hass(hass) {
         const entityId = this.config.entity;
 
@@ -6,7 +7,7 @@ class ParkingTimeCard extends HTMLElement {
         const parkingStartTime = new Date(state.state);
 
         const timeZone = this.config.time_zone;
-        const locale = hass.language;
+        const locale = this.getLocale(hass.language);
 
         this.updateTime(parkingStartTime, locale, timeZone);
 
@@ -15,11 +16,33 @@ class ParkingTimeCard extends HTMLElement {
         }
     }
 
+    getLocale(hass) {
+        const isValidLocale = locale => {
+            const parts = locale.split('-');
+            if (parts.length !== 2) return false;
+            try {
+                new Intl.Locale(locale);
+                return true;
+            } catch {
+                return false;
+            }
+        };
+
+        if (isValidLocale(hass.language)) {
+            return hass.language;
+        } else {
+            return 'en-SE'
+        }
+    }
+
     updateTime(startTime, locale, timeZone) {    
     
         // assign curent time values
         this.innerHTML = `
             <ha-alert title="Has been parked for" alert-type="info">
+                <span slot="icon">
+                    <ha-icon icon="mdi:parking"></ha-icon>
+                </span>
                 <div class="primary">
                     ${this.elapsedTimeString(startTime, locale, timeZone)}
                 </div>
