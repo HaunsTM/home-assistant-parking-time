@@ -20,10 +20,10 @@ class ParkingTimeCard extends HTMLElement {
         this.innerHTML = `
             <ha-alert title="Has been parked for" alert-type="info">
                 <div class="primary">
-                    ${elapsedTimeString(startTime, locale, timeZone)}
+                    ${this.elapsedTimeString(startTime, locale, timeZone)}
                 </div>
                 <div class="secondary">
-                    <ha-icon icon="mdi:parking"></ha-icon> ${parkingTimeString(startTime, locale, timeZone)}
+                    <ha-icon icon="mdi:parking"></ha-icon> ${this.parkingTimeString(startTime, locale, timeZone)}
                 </div>
             </ha-alert>`;
     }
