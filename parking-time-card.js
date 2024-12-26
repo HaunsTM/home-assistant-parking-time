@@ -75,6 +75,7 @@ class ParkingTimeCard extends HTMLElement {
             hour12: false
         };
 
+        console.log(timeZone);
         return startTime.toLocaleString(locale, options);
     }
 
