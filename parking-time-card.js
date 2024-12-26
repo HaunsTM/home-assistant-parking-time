@@ -47,7 +47,7 @@ class ParkingTimeCard extends HTMLElement {
                     ${this.elapsedTimeString(startTime, locale, timeZone)}
                 </div>
                 <div class="secondary">
-                    <ha-icon icon="mdi:parking"></ha-icon> ${this.parkingTimeString(startTime, locale, timeZone)}
+                    ${this.parkingTimeString(startTime, locale, timeZone)}
                 </div>
             </ha-alert>`;
     }
