@@ -7,7 +7,7 @@ class ParkingTimeCard extends HTMLElement {
         const parkingStartTime = new Date(state.state);
 
         const timeZone = this.config.time_zone;
-        const locale = this.getLocale(hass.language);
+        const locale = this.getLocale(hass);
 
         this.updateTime(parkingStartTime, locale, timeZone);
 
