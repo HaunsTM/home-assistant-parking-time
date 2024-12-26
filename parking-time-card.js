@@ -17,6 +17,7 @@ class ParkingTimeCard extends HTMLElement {
 
     updateTime(startTime, locale, timeZone) {    
     
+        // assign curent time values
         this.innerHTML = `
             <ha-alert title="Has been parked for" alert-type="info">
                 <div class="primary">
