@@ -52,7 +52,7 @@ class ParkingTimeCard extends HTMLElement {
             second: '2-digit',
             hour12: false
         };
-        console.log(timeZone);
+        console.log(timeZoned);
         return startTime.toLocaleString(locale, options);
     }
 
