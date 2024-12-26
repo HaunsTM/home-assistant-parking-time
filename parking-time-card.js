@@ -7,31 +7,12 @@ class ParkingTimeCard extends HTMLElement {
         const parkingStartTime = new Date(state.state);
 
         const timeZone = this.config.time_zone;
-        const locale = this.getLocale(hass);
+        const locale = 'en-SE';
 
         this.updateTime(parkingStartTime, locale, timeZone);
 
         if (!this.interval) {
             this.interval = setInterval(() => this.updateTime(parkingStartTime, timeZone), 1000);
-        }
-    }
-
-    getLocale(hass) {
-        const isValidLocale = locale => {
-            const parts = locale.split('-');
-            if (parts?.length !== 2) return false;
-            try {
-                new Intl.Locale(locale);
-                return true;
-            } catch {
-                return false;
-            }
-        };
-
-        if (isValidLocale(hass.language)) {
-            return hass.language;
-        } else {
-            return 'en-SE'
         }
     }
 
