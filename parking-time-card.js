@@ -19,7 +19,7 @@ class ParkingTimeCard extends HTMLElement {
     getLocale(hass) {
         const isValidLocale = locale => {
             const parts = locale.split('-');
-            if (parts.length !== 2) return false;
+            if (parts?.length !== 2) return false;
             try {
                 new Intl.Locale(locale);
                 return true;
