@@ -8,7 +8,7 @@
   "render_readme": true,
   "zip_release": false,
   "iot_class": "local_polling",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "resources": [
     {
       "url": "/local/parking-time-card.js",
