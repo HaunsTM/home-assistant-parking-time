@@ -1,39 +1,44 @@
 class ParkingTimeCard extends HTMLElement {
+    constructor() {
+        super();
+        Object.defineProperty(this, 'timeZone', {
+            value: Intl.DateTimeFormat().resolvedOptions().timeZone ?? "Europe/Stockholm",
+            writable: false
+        });
+        Object.defineProperty(this, 'locale', {
+            value: 'en-SE',
+            writable: false
+        });
+    }
 
     set hass(hass) {
         const entityId = this.config.entity;
-
         const state = hass.states[entityId];
         const parkingStartTime = new Date(state.state);
 
-        const timeZone = "Europe/Stockholm";
-        const locale = 'en-SE';
-
-        this.updateTime(parkingStartTime, locale, timeZone);
+        this.updateTime(parkingStartTime);
 
         if (!this.interval) {
-            this.interval = setInterval(() => this.updateTime(parkingStartTime, timeZone), 1000);
+            this.interval = setInterval(() => this.updateTime(parkingStartTime), 1000);
         }
     }
 
-    updateTime(startTime, locale, timeZone) {    
-    
-        // assign curent time values
+    updateTime(startTime) {
         this.innerHTML = `
             <ha-alert title="Has been parked for" alert-type="info">
                 <span slot="icon">
                     <ha-icon icon="mdi:parking"></ha-icon>
                 </span>
                 <div class="primary">
-                    ${this.elapsedTimeString(startTime, locale, timeZone)}
+                    ${this.elapsedTimeString(startTime)}
                 </div>
                 <div class="secondary">
-                    ${this.parkingTimeString(startTime, locale, timeZone)}
+                    ${this.parkingTimeString(startTime)}
                 </div> 
             </ha-alert>`;
     }
 
-    elapsedTimeString(startTime, locale, timeZone) {
+    elapsedTimeString(startTime) {
         const now = new Date();
         const elapsed = now - startTime;
         const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
@@ -44,18 +49,17 @@ class ParkingTimeCard extends HTMLElement {
         return `${days > 0 ? `${days}d ` : ''}${this.pad(hours)} h ${this.pad(minutes)} min ${this.pad(seconds)} s`;
     }
 
-    parkingTimeString(startTime, locale, timeZone) {
+    parkingTimeString(startTime) {
         const options = {
-            hour12: false
+            hour12: false,
+            timeZone: this.timeZone
         };
 
         try {
-            
-            return startTime.toLocaleString(locale, options);
-          } catch (error) {
+            return startTime.toLocaleString(this.locale, options);
+        } catch (error) {
             console.error(error);
-          }
-          
+        }
     }
 
     pad(value) {
