@@ -51,7 +51,13 @@ class ParkingTimeCard extends HTMLElement {
             hour12: false
         };
 
-        return startTime.toLocaleString(locale, options);
+        try {
+            
+            return startTime.toLocaleString(locale, options);
+          } catch (error) {
+            console.error(error);
+          }
+          
     }
 
     pad(value) {
