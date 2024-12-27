@@ -6,7 +6,7 @@ class ParkingTimeCard extends HTMLElement {
         const state = hass.states[entityId];
         const parkingStartTime = new Date(state.state);
 
-        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "Europe/Stockholm";
+        const timeZone = "Europe/Stockholm";
         const locale = 'en-SE';
 
         this.updateTime(parkingStartTime, locale, timeZone);
@@ -29,7 +29,7 @@ class ParkingTimeCard extends HTMLElement {
                 </div>
                 <div class="secondary">
                     ${this.parkingTimeString(startTime, locale, timeZone)}
-                </div>
+                </div> 
             </ha-alert>`;
     }
 
@@ -46,8 +46,6 @@ class ParkingTimeCard extends HTMLElement {
 
     parkingTimeString(startTime, locale, timeZone) {
         const options = {
-            timeZone: timeZone,
-            timeZoneName: 'short',
             hour12: false
         };
 
